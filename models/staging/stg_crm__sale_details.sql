@@ -1,7 +1,7 @@
 WITH crm_sale_details AS (
     SELECT * 
     FROM 
-        SALES_DB.RAW.CRM_SALES_DETAILS
+        {{ source('sales_db', 'crm_sale_details') }}
 )
 SELECT
     sls_ord_num  AS order_number,

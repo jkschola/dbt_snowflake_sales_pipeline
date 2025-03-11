@@ -1,7 +1,7 @@
 WITH crm_products AS (
     SELECT * 
     FROM 
-        SALES_DB.RAW.CRM_PRD_INFO
+        {{ source('sales_db', 'crm_products') }}
 )
 SELECT
     prd_id AS product_id, 

@@ -17,4 +17,4 @@ sources:
           identifier: erp_loc_a101
 
         - name: erp_customers
-          identifier: erp_cust_az123
+          identifier: erp_cust_az12

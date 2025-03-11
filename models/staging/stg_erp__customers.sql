@@ -1,7 +1,7 @@
 WITH erp_customers AS (
     SELECT * 
     FROM 
-        SALES_DB.RAW.ERP_CUST_AZ12
+        {{ source('sales_db', 'erp_customers') }}
 )
 SELECT
     cid AS customer_key,
