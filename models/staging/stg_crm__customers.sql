@@ -1,7 +1,7 @@
 WITH crm_customers AS (
     SELECT * 
     FROM 
-        SALES_DB.RAW.CRM_CUST_INFO
+        {{ source('sales_db', 'crm_customers') }}
 )
 SELECT
     cst_id AS customer_id,   
