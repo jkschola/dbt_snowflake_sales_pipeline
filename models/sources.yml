@@ -4,17 +4,17 @@ sources:
     - name: sales_db
       schema: raw
       tables:
-        - name: crm_cust_info
-          identifier: crm_customers
+        - name: crm_customers
+          identifier: crm_cust_info
 
-        - name: crm_prd_info
-          identifier: crm_products
+        - name: crm_products
+          identifier: crm_prd_info
 
-        - name: crm_sales_details
-          identifier: crm_sale_details
+        - name: crm_sale_details
+          identifier: crm_sales_details
 
-        - name: erp_loc_a101
-          identifier: erp_customer_locations
+        - name: erp_customer_locations
+          identifier: erp_loc_a101
 
-        - name: erp_cust_az123
-          identifier: erp_customers
+        - name: erp_customers
+          identifier: erp_cust_az123
