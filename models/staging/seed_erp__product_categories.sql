@@ -4,7 +4,7 @@ WITH erp_product_categories AS (
         {{ ref('seed_erp_product_categories') }}
 )
 SELECT
-    id AS product_id,
+    id AS category_key,
     cat AS category,
     subcat AS subcategory,
     maintenance AS maintenance
