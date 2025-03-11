@@ -35,3 +35,7 @@ models:
     staging:      # Applies to all files under models/staging
       +materialized: view
       +schema: STAGING
+
+seeds:
+  dbt_snowflake_sales_pipeline:
+    +schema: SEEDS
