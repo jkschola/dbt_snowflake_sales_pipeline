@@ -1,3 +1,8 @@
+-- The RAW data from CRM system is stored in CSV files. 
+-- The data is stored in three files: cust_info.csv, prd_info.csv, and sales_details.csv. 
+-- The data in these files needs to be loaded into Snowflake tables. The data in the files is as follows:
+
+
 -- 1️⃣ Create a File Format for CSV Files
 
 CREATE OR REPLACE FILE FORMAT SALES_DB.RAW.FF_CSV_FORMAT
