@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+    - name: sales_db
+      schema: raw
+      tables:
+        - name: crm_cust_info
+          identifier: crm_customers
+
+        - name: crm_prd_info
+          identifier: crm_products
+
+        - name: crm_sales_details
+          identifier: crm_sale_details
+
+        - name: erp_loc_a101
+          identifier: erp_customer_locations
+
+        - name: erp_cust_az123
+          identifier: erp_customers
