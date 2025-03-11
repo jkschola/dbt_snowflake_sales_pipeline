@@ -18,30 +18,44 @@ CREATE OR REPLACE STAGE SALES_DB.RAW.CSV_STAGE;
 
 
 -- 3️⃣ Explore the data before loading
--- cust_info.csv
--- prd_info.csv
--- sales_details.csv
+
+-- CRM files (each CRM file has 7 columns)
+    -- cust_info.csv
+    -- prd_info.csv
+    -- sales_details.csv
 
 
-select $1, $2, $3, $4, $5, $6, $7, $8
+select $1, $2, $3, $4, $5, $6, $7
 from @SALES_DB.RAW.CSV_STAGE/cust_info.csv
 (file_format => SALES_DB.RAW.FF_CSV_FORMAT);
 
-
-select $1, $2, $3, $4, $5, $6, $7, $8
+select $1, $2, $3, $4, $5, $6, $7
 from @SALES_DB.RAW.CSV_STAGE/prd_info.csv
 (file_format => SALES_DB.RAW.FF_CSV_FORMAT);
 
-select $1, $2, $3, $4, $5, $6, $7, $8
+select $1, $2, $3, $4, $5, $6, $7
 from @SALES_DB.RAW.CSV_STAGE/sales_details.csv
 (file_format => SALES_DB.RAW.FF_CSV_FORMAT);
 
--- each file has 7 columns
+
+-- ERP Files
+    -- CUST_AZ12.csv
+    -- LOC_A101.csv
+
+select $1, $2, $3
+from @SALES_DB.RAW.CSV_STAGE/CUST_AZ12.csv
+(file_format => SALES_DB.RAW.FF_CSV_FORMAT);
+
+
+select $1, $2
+from @SALES_DB.RAW.CSV_STAGE/LOC_A101.csv
+(file_format => SALES_DB.RAW.FF_CSV_FORMAT);
+
 
 
 -- 4️⃣ Create Tables in the RAW Schema
 
-
+-- CRM Tables
 
 -- Customers Table
 CREATE OR REPLACE TABLE SALES_DB.RAW.crm_cust_info (
@@ -79,9 +93,31 @@ CREATE OR REPLACE TABLE SALES_DB.RAW.crm_sales_details (
 );
 
 
+-- ERP Tables
+
+-- Customer Data from ERP
+
+CREATE OR REPLACE TABLE SALES_DB.RAW.erp_cust_az12 (
+    CID STRING,
+    BDATE DATE,
+    GEN STRING
+);
+
+-- Customer Location Table
+
+CREATE OR REPLACE TABLE SALES_DB.RAW.erp_loc_a101 (
+    CID STRING,
+    CNTRY STRING
+);
+
+
+-- Product Category Table (left in seeds in dbt)
+
+
+
 -- 5️⃣ Load Data into Tables
 
--- Load Customers Data
+-- Load CRM Customers Data
 COPY INTO SALES_DB.RAW.crm_cust_info
 FROM @SALES_DB.RAW.CSV_STAGE
 FILES = ('cust_info.csv')
@@ -92,7 +128,7 @@ SELECT * FROM SALES_DB.RAW.crm_cust_info;
 
 
 
--- Load Products Data
+-- Load CRM Products Data
 COPY INTO SALES_DB.RAW.crm_prd_info
 FROM @SALES_DB.RAW.CSV_STAGE
 FILES = ('prd_info.csv')
@@ -102,7 +138,7 @@ FILE_FORMAT = (FORMAT_NAME = SALES_DB.RAW.FF_CSV_FORMAT);
 SELECT * FROM SALES_DB.RAW.crm_prd_info;
 
 
--- Load Sales Details Data
+-- Load CRM Sales Details Data
 COPY INTO SALES_DB.RAW.crm_sales_details
 FROM @SALES_DB.RAW.CSV_STAGE
 FILES = ('sales_details.csv')
@@ -110,4 +146,23 @@ FILE_FORMAT = (FORMAT_NAME = SALES_DB.RAW.FF_CSV_FORMAT);
 
 
 SELECT * FROM SALES_DB.RAW.crm_sales_details;
+
+
+-- Load ERP Customer Data
+COPY INTO SALES_DB.RAW.erp_cust_az12
+FROM @SALES_DB.RAW.CSV_STAGE
+FILES = ('CUST_AZ12.csv')
+FILE_FORMAT = (FORMAT_NAME = SALES_DB.RAW.FF_CSV_FORMAT);
+
+SELECT * FROM SALES_DB.RAW.erp_cust_az12;
+
+
+-- Load ERP Customer Location Data
+COPY INTO SALES_DB.RAW.erp_loc_a101
+FROM @SALES_DB.RAW.CSV_STAGE
+FILES = ('LOC_A101.csv')
+FILE_FORMAT = (FORMAT_NAME = SALES_DB.RAW.FF_CSV_FORMAT);
+
+
+SELECT * FROM SALES_DB.RAW.erp_loc_a101;
 
