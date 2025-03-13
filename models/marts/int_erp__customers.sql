@@ -1,4 +1,4 @@
-WITH erp_customers AS (
+WITH erp_customers_cleansed AS (
     SELECT * 
     FROM 
         {{ ref('stg_erp__customers') }}
@@ -11,6 +11,11 @@ SELECT
         ELSE customer_key
     END AS customer_key_cleaned,
     birthdate,
+    CASE
+        WHEN birthdate > GETDATE() THEN NULL
+        ELSE birthdate
+    END AS birthdate_cleansed, 
+    -- Set future birthdates to NULL
     gender
 FROM 
-    erp_customers
+    erp_customers_cleansed
