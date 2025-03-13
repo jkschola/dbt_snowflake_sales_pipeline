@@ -4,8 +4,8 @@ WITH erp_customers AS (
         {{ ref('stg_erp__customers') }}
 )
 SELECT
-    cid AS customer_key,
-    bdate AS birthdate,
-    gen AS gender
+    customer_key,
+    birthdate,
+    gender
 FROM 
     erp_customers
