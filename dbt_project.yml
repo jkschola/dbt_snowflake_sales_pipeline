@@ -38,6 +38,9 @@ models:
     intermediate: # Applies to all files under models/intermediate
       +materialized: view
       +schema: INTERMEDIATE
+    marts:        # Applies to all files under models/marts
+      +materialized: Table
+      +schema: MARTS
 
 seeds:
   dbt_snowflake_sales_pipeline:
