@@ -16,6 +16,12 @@ SELECT
         ELSE birthdate
     END AS birthdate_cleansed, 
     -- Set future birthdates to NULL
-    gender
+    gender,
+    CASE
+        WHEN UPPER(TRIM(gender)) IN ('F', 'FEMALE') THEN 'Female'
+        WHEN UPPER(TRIM(gender)) IN ('M', 'MALE') THEN 'Male'
+        ELSE 'n/a'
+    END AS gender_cleansed
+    -- Normalize gender values and handle unknown cases
 FROM 
     erp_customers_cleansed
