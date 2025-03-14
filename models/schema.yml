@@ -11,6 +11,12 @@ models:
           - unique # Check for Uniqueness of Customer Key
           - not_null # Check for Null Values in Customer Key
 
+      - name: customer_key
+        description: Unique identifier for each customer
+        tests:
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "^[^ ].*[^ ]$"  # No spaces at start or end of the string
+
   - name: dim_products
     description: This table provides information about the products and their attributes.
     
@@ -20,6 +26,13 @@ models:
         tests:
           - unique # Check for Uniqueness of Product Key
           - not_null # Check for Null Values in Product Key
+
+      - name: cost
+        description: The cost of the product
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              strictly : true   # Ensures product cost is always positive
 
   - name: fact_sales
     description: This table stores transactional sales data for analytical purposes.
@@ -44,4 +57,3 @@ models:
           - relationships:
               to: ref('dim_products')
               field: product_key
-    
