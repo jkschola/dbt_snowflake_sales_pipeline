@@ -1,7 +1,5 @@
 packages: # Run `dbt deps` to install packages from your packages.yml file
-
   - package: dbt-labs/dbt_utils # The name of the package you want to use
     version: 1.3.0 # Specify the version of the package you want to use
-
   - package: calogica/dbt_expectations
     version: 0.10.4  
