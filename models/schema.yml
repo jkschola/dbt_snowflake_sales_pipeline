@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: This table stores customer details enriched with demographic and geographic data.
+    columns:
+      - name: customer_key 
+        description: Unique identifier for each customer
+        tests:
+          - unique # Check for Uniqueness of Customer Key
+
+    
