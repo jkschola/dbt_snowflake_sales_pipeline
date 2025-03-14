@@ -8,6 +8,7 @@ models:
         description: Unique identifier for each customer
         tests:
           - unique # Check for Uniqueness of Customer Key
+          - not_null # Check for Null Values in Customer Key
 
   - name: dim_products
     description: This table provides information about the products and their attributes.
@@ -16,4 +17,5 @@ models:
         description: Unique identifier for each product
         tests:
           - unique # Check for Uniqueness of Product Key
+          - not_null # Check for Null Values in Product Key
     
