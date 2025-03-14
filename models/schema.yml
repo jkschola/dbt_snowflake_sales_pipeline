@@ -9,4 +9,11 @@ models:
         tests:
           - unique # Check for Uniqueness of Customer Key
 
+  - name: dim_products
+    description: This table provides information about the products and their attributes.
+    columns:
+      - name: product_key
+        description: Unique identifier for each product
+        tests:
+          - unique # Check for Uniqueness of Product Key
     
