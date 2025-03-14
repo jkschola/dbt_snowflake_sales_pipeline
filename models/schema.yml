@@ -3,6 +3,7 @@ version: 2
 models:
   - name: dim_customers
     description: This table stores customer details enriched with demographic and geographic data.
+
     columns:
       - name: customer_key 
         description: Unique identifier for each customer
@@ -12,6 +13,7 @@ models:
 
   - name: dim_products
     description: This table provides information about the products and their attributes.
+    
     columns:
       - name: product_key
         description: Unique identifier for each product
