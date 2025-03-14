@@ -18,4 +18,28 @@ models:
         tests:
           - unique # Check for Uniqueness of Product Key
           - not_null # Check for Null Values in Product Key
+
+  - name: fact_sales
+    description: This table stores transactional sales data for analytical purposes.
+
+    columns:
+      - name: order_number
+        description: Unique alphanumeric identifier for each sales order.
+        tests:
+          - unique # Check for Uniqueness of order_number
+          - not_null # Check for Null Values in order_number
+
+      - name: customer_id
+        description: The customer's ID (Foreign key). References the order to the customer dimension (dim_customers) table.
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: product_key
+        description: The product's ID (Foreign key). References the order to the product dimension (dim_products) table.
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: product_key
     
