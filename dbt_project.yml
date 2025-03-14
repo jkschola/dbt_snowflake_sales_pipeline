@@ -39,7 +39,7 @@ models:
       +materialized: view
       +schema: INTERMEDIATE
     marts:        # Applies to all files under models/marts
-      +materialized: Table
+      +materialized: table
       +schema: MARTS
 
 seeds:
